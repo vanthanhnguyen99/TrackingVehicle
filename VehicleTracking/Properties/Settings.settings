@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="VehicleTracking.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="VihicleTracking" Type="System.String" Scope="User">
+      <Value Profile="(Default)">dXMuuu5IUUO0EAeoRWUQ~a5xyce-TWMN1LUpg48g3Pg~AjDTPUxypaLVEfJFh8_TdMZaHKZ9XU0vnScBfyre6dHV7C5ui4v-6Oo3nEC4G6M0</Value>
+    </Setting>
+    <Setting Name="abc" Type="DevExpress.XtraMap.ConnectionProtocol" Scope="User">
+      <Value Profile="(Default)">Https</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
