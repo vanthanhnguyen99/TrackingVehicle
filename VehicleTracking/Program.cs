@@ -203,6 +203,7 @@ namespace VehicleTracking
         [STAThread]
         static void Main()
         {
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Program.main = new Form1();

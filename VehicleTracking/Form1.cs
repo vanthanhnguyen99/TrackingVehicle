@@ -24,7 +24,7 @@ namespace VehicleTracking
         bool isFocus = true;
         public Form1()
         {
-            
+            Thread.CurrentThread.Priority = ThreadPriority.Highest;
             InitializeComponent();
             //SetShapeData();
             //SetChartData();

@@ -30,16 +30,9 @@ namespace VehicleTracking
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            DevExpress.XtraMap.MiniMap miniMap1 = new DevExpress.XtraMap.MiniMap();
-            DevExpress.XtraMap.DynamicMiniMapBehavior dynamicMiniMapBehavior1 = new DevExpress.XtraMap.DynamicMiniMapBehavior();
-            DevExpress.XtraMap.KeyColorColorizer keyColorColorizer1 = new DevExpress.XtraMap.KeyColorColorizer();
-            DevExpress.XtraMap.ArgumentItemKeyProvider argumentItemKeyProvider1 = new DevExpress.XtraMap.ArgumentItemKeyProvider();
-            DevExpress.XtraMap.ColorizerKeyItem colorizerKeyItem1 = new DevExpress.XtraMap.ColorizerKeyItem();
-            DevExpress.XtraMap.ColorizerKeyItem colorizerKeyItem2 = new DevExpress.XtraMap.ColorizerKeyItem();
-            DevExpress.XtraMap.ColorizerKeyItem colorizerKeyItem3 = new DevExpress.XtraMap.ColorizerKeyItem();
-            DevExpress.XtraMap.ColorizerKeyItem colorizerKeyItem4 = new DevExpress.XtraMap.ColorizerKeyItem();
-            DevExpress.XtraMap.ColorizerKeyItem colorizerKeyItem5 = new DevExpress.XtraMap.ColorizerKeyItem();
-            this.miniMapVectorItemsLayer1 = new DevExpress.XtraMap.MiniMapVectorItemsLayer();
+            DevExpress.XtraMap.MiniMap miniMap2 = new DevExpress.XtraMap.MiniMap();
+            DevExpress.XtraMap.DynamicMiniMapBehavior dynamicMiniMapBehavior2 = new DevExpress.XtraMap.DynamicMiniMapBehavior();
+            DevExpress.XtraMap.MiniMapVectorItemsLayer miniMapVectorItemsLayer2 = new DevExpress.XtraMap.MiniMapVectorItemsLayer();
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.chkMiniMap = new DevExpress.XtraBars.BarCheckItem();
             this.chkShowNavPanel = new DevExpress.XtraBars.BarCheckItem();
@@ -48,6 +41,7 @@ namespace VehicleTracking
             this.bbiZoomOut = new DevExpress.XtraBars.BarButtonItem();
             this.bbiInitialView = new DevExpress.XtraBars.BarButtonItem();
             this.barCheckItem1 = new DevExpress.XtraBars.BarCheckItem();
+            this.barButtonItem_changeType = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -60,12 +54,9 @@ namespace VehicleTracking
             this.bingMapDataProvider1 = new DevExpress.XtraMap.BingMapDataProvider();
             this.vectorItemsLayer3 = new DevExpress.XtraMap.VectorItemsLayer();
             this.mapItemStorage1 = new DevExpress.XtraMap.MapItemStorage();
-            this.vectorItemsLayer2 = new DevExpress.XtraMap.VectorItemsLayer();
-            this.barButtonItem_changeType = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapControl1)).BeginInit();
             this.SuspendLayout();
-            this.miniMapVectorItemsLayer1.Name = "MiniMapShipLayer";
             // 
             // ribbonControl1
             // 
@@ -155,6 +146,15 @@ namespace VehicleTracking
             this.barCheckItem1.Name = "barCheckItem1";
             this.barCheckItem1.CheckedChanged += new DevExpress.XtraBars.ItemClickEventHandler(this.barCheckItem1_CheckedChanged);
             // 
+            // barButtonItem_changeType
+            // 
+            this.barButtonItem_changeType.Caption = "Change Type";
+            this.barButtonItem_changeType.Id = 11;
+            this.barButtonItem_changeType.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem_changeType.ImageOptions.Image")));
+            this.barButtonItem_changeType.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem_changeType.ImageOptions.LargeImage")));
+            this.barButtonItem_changeType.Name = "barButtonItem_changeType";
+            this.barButtonItem_changeType.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -199,13 +199,13 @@ namespace VehicleTracking
             this.mapControl1.Layers.Add(this.informationLayer1);
             this.mapControl1.Layers.Add(this.imageLayer1);
             this.mapControl1.Layers.Add(this.vectorItemsLayer3);
-            this.mapControl1.Layers.Add(this.vectorItemsLayer2);
             this.mapControl1.Location = new System.Drawing.Point(0, 158);
-            miniMap1.Alignment = DevExpress.XtraMap.MiniMapAlignment.BottomRight;
-            miniMap1.Behavior = dynamicMiniMapBehavior1;
-            miniMap1.Layers.Add(this.miniMapVectorItemsLayer1);
-            miniMap1.Visible = false;
-            this.mapControl1.MiniMap = miniMap1;
+            miniMap2.Alignment = DevExpress.XtraMap.MiniMapAlignment.BottomRight;
+            miniMap2.Behavior = dynamicMiniMapBehavior2;
+            miniMapVectorItemsLayer2.Name = "MiniMapShipLayer";
+            miniMap2.Layers.Add(miniMapVectorItemsLayer2);
+            miniMap2.Visible = false;
+            this.mapControl1.MiniMap = miniMap2;
             this.mapControl1.Name = "mapControl1";
             this.mapControl1.Size = new System.Drawing.Size(1101, 565);
             this.mapControl1.TabIndex = 0;
@@ -214,49 +214,14 @@ namespace VehicleTracking
             this.informationLayer1.DataProvider = this.bingGeocodeDataProvider1;
             this.bingGeocodeDataProvider1.BingKey = "dXMuuu5IUUO0EAeoRWUQ~a5xyce-TWMN1LUpg48g3Pg~AjDTPUxypaLVEfJFh8_TdMZaHKZ9XU0vnScBf" +
     "yre6dHV7C5ui4v-6Oo3nEC4G6M0";
-            this.bingGeocodeDataProvider1.ConnectionProtocol = DevExpress.XtraMap.ConnectionProtocol.Https;
             this.bingGeocodeDataProvider1.MaxVisibleResultCount = 1;
             this.bingGeocodeDataProvider1.ProcessMouseEvents = true;
             this.imageLayer1.DataProvider = this.bingMapDataProvider1;
             this.bingMapDataProvider1.BingKey = "dXMuuu5IUUO0EAeoRWUQ~a5xyce-TWMN1LUpg48g3Pg~AjDTPUxypaLVEfJFh8_TdMZaHKZ9XU0vnScBf" +
     "yre6dHV7C5ui4v-6Oo3nEC4G6M0";
             this.bingMapDataProvider1.CacheOptions.MemoryLimit = 4096;
-            this.bingMapDataProvider1.ConnectionProtocol = DevExpress.XtraMap.ConnectionProtocol.Https;
             this.bingMapDataProvider1.Kind = DevExpress.XtraMap.BingMapKind.Road;
             this.vectorItemsLayer3.Data = this.mapItemStorage1;
-            keyColorColorizer1.Colors.Add(System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(93)))), ((int)(((byte)(106))))));
-            keyColorColorizer1.Colors.Add(System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(124)))), ((int)(((byte)(217))))));
-            keyColorColorizer1.Colors.Add(System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(221)))), ((int)(((byte)(116))))));
-            keyColorColorizer1.Colors.Add(System.Drawing.Color.FromArgb(((int)(((byte)(103)))), ((int)(((byte)(191)))), ((int)(((byte)(88))))));
-            keyColorColorizer1.Colors.Add(System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(104)))), ((int)(((byte)(195))))));
-            keyColorColorizer1.ItemKeyProvider = argumentItemKeyProvider1;
-            colorizerKeyItem1.Key = "Gases";
-            colorizerKeyItem1.Name = "Gases";
-            colorizerKeyItem2.Key = "Nuclear";
-            colorizerKeyItem2.Name = "Nuclear";
-            colorizerKeyItem3.Key = "Petroleum Products";
-            colorizerKeyItem3.Name = "Petroleum Products";
-            colorizerKeyItem4.Key = "Renewables";
-            colorizerKeyItem4.Name = "Renewables";
-            colorizerKeyItem5.Key = "Solid Fuels";
-            colorizerKeyItem5.Name = "Solid Fuels";
-            keyColorColorizer1.Keys.Add(colorizerKeyItem1);
-            keyColorColorizer1.Keys.Add(colorizerKeyItem2);
-            keyColorColorizer1.Keys.Add(colorizerKeyItem3);
-            keyColorColorizer1.Keys.Add(colorizerKeyItem4);
-            keyColorColorizer1.Keys.Add(colorizerKeyItem5);
-            this.vectorItemsLayer2.Colorizer = keyColorColorizer1;
-            this.vectorItemsLayer2.Name = "ChartLayer";
-            this.vectorItemsLayer2.ToolTipPattern = "{Country}\n\n%A0%: %V0:n2%\n%A1%: %V1:n2%\n%A2%: %V2:n2%\n%A3%: %V3:n2%\n%A4%: %V4:n2%";
-            // 
-            // barButtonItem_changeType
-            // 
-            this.barButtonItem_changeType.Caption = "Change Type";
-            this.barButtonItem_changeType.Id = 11;
-            this.barButtonItem_changeType.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.Image")));
-            this.barButtonItem_changeType.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.LargeImage")));
-            this.barButtonItem_changeType.Name = "barButtonItem_changeType";
-            this.barButtonItem_changeType.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
             // 
             // Form1
             // 
@@ -295,14 +260,12 @@ namespace VehicleTracking
         private DevExpress.XtraMap.ImageLayer imageLayer1;
         private DevExpress.XtraMap.InformationLayer informationLayer1;
         public DevExpress.XtraMap.BingGeocodeDataProvider bingGeocodeDataProvider1;
-        private DevExpress.XtraMap.VectorItemsLayer vectorItemsLayer2;
-        private DevExpress.XtraMap.VectorItemsLayer vectorItemsLayer3;
-        private DevExpress.XtraMap.MapItemStorage mapItemStorage1;
-        private DevExpress.XtraMap.MiniMapVectorItemsLayer miniMapVectorItemsLayer1;
         public DevExpress.XtraMap.MapControl mapControl1;
         public System.Windows.Forms.ComboBox comboBox1;
         private DevExpress.XtraBars.BarButtonItem barButtonItem_changeType;
         public DevExpress.XtraMap.BingMapDataProvider bingMapDataProvider1;
+        private DevExpress.XtraMap.VectorItemsLayer vectorItemsLayer3;
+        private DevExpress.XtraMap.MapItemStorage mapItemStorage1;
     }
 }
 
