@@ -24,7 +24,6 @@ namespace VehicleTracking
         bool isFocus = true;
         public Form1()
         {
-            Thread.CurrentThread.Priority = ThreadPriority.Highest;
             InitializeComponent();
             //SetShapeData();
             //SetChartData();
@@ -251,8 +250,16 @@ namespace VehicleTracking
         private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (bingMapDataProvider1.Kind == BingMapKind.Road)
+            {
+                Thread.CurrentThread.Priority = ThreadPriority.Highest;
                 bingMapDataProvider1.Kind = BingMapKind.Hybrid;
-            else bingMapDataProvider1.Kind = BingMapKind.Road;
+            }
+
+            else
+            {
+                Thread.CurrentThread.Priority = ThreadPriority.Highest;
+                bingMapDataProvider1.Kind = BingMapKind.Road;
+            }
         }
     }
 }
