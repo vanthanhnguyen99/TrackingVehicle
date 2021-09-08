@@ -102,7 +102,7 @@ namespace VehicleTracking
                         catch (Exception e)
                         {
                             
-                            if (main.comboBox1 != null) main.comboBox1.Invoke((MethodInvoker)(() => main.comboBox1.Items.Add(location.name)));
+                            if (main != null) main.comboBox1.Invoke((MethodInvoker)(() => main.comboBox1.Items.Add(location.name)));
                             Console.WriteLine("khoi catch");
                         }
                         if (location.name == tracking.name)
