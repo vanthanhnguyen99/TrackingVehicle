@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace VehicleTracking
@@ -20,7 +21,7 @@ namespace VehicleTracking
         public static SortedDictionary<string, coord> dataList = new SortedDictionary<string, coord>();
         public static coord location;
         public static bool isRefresh;
-        public static bool serverAvailable = true;
+        public static int error = -1; // 0 là không thể kết nối server, 1 là server từ chối kết nối 
         public static void startClient()
         {
             tracking.name = "";
@@ -52,7 +53,7 @@ namespace VehicleTracking
                     // clear all data on startup
                     dataList.Clear();
                     tracking.name = "";
-                    if (Program.main.comboBox1 != null)
+                    if (Program.main != null)
                     {
                         Program.main.comboBox1.Invoke((MethodInvoker)(() => Program.main.comboBox1.Items.Clear()));
                         Program.main.comboBox1.Invoke((MethodInvoker)(() => Program.main.comboBox1.Items.Add("Vehicle's name")));
@@ -73,11 +74,23 @@ namespace VehicleTracking
 
                     // Receive the response from the remote device.
                     
-                    int byteRecv = sender.Receive(bytes, 1, 0); 
-                    if (!BitConverter.ToBoolean(bytes,0)) return; // return if server not accept
+                    int byteRecv = sender.Receive(bytes, 1, 0);
+                    if (!BitConverter.ToBoolean(bytes, 0))
+                    {
+                        error = 1; // server từ chối kết nối
+                        return; // return if server not accept
+                    }
                     bytes.Initialize();
                     byteRecv = sender.Receive(bytes, 0);
                     location.convertByteToCord(bytes);
+
+                    // check Server disconnect
+                    if (byteRecv == 0)
+                    {
+                        error = 2;
+                        Console.WriteLine("Server Disconnected");
+                        return;
+                    }    
 
                     if (location.x != -1)
                     {
@@ -88,6 +101,7 @@ namespace VehicleTracking
                         }
                         catch (Exception e)
                         {
+                            
                             if (main.comboBox1 != null) main.comboBox1.Invoke((MethodInvoker)(() => main.comboBox1.Items.Add(location.name)));
                             Console.WriteLine("khoi catch");
                         }
@@ -175,6 +189,14 @@ namespace VehicleTracking
                     sender.Shutdown(SocketShutdown.Both);
                     sender.Close();
 
+                    // check Server disconnect
+                    if (byteRecv == 0)
+                    {
+                        error = 2;
+                        Console.WriteLine("Server Disconnected");
+                        return;
+                    }
+
                 }
                 catch (ArgumentNullException ane)
                 {
@@ -183,7 +205,9 @@ namespace VehicleTracking
                 catch (SocketException se)
                 {
                     Console.WriteLine("SocketException : {0}", se.ToString());
-                    serverAvailable = false;
+                    error = 0; // không thể kết nối tới server
+                    Console.WriteLine("Đã lỗi rồi");
+                    return;
                 }
                 catch (Exception e)
                 {
@@ -200,6 +224,7 @@ namespace VehicleTracking
 
 
         }
+      
         [STAThread]
         static void Main()
         {
@@ -208,6 +233,7 @@ namespace VehicleTracking
             Application.SetCompatibleTextRenderingDefault(false);
             Program.main = new Form1();
             Application.Run(main);
+
         }
     }
 }

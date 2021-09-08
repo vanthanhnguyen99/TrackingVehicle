@@ -15,35 +15,49 @@ namespace VehicleTracking
     {
         
         public static BindingList<string> list = new BindingList<string>();
-        //VectorItemsLayer VectorLayer { get { return (VectorItemsLayer)map.Layers["VectorLayer"]; } }
-        //MapItemStorage ItemStorage { get { return (MapItemStorage)VectorLayer.Data; } }
+
         MapItemStorage storage;
         MapItem[] items = new MapItem[1];
         VectorItemsLayer itemsLayer;
         GeoPoint center;
         bool isFocus = true;
+
+        Thread t; // tcp
+        Thread thread; // display vehicle
+        Thread checking; // check connection with Server
+        Thread currentThread;
         public Form1()
         {
             InitializeComponent();
-            //SetShapeData();
-            //SetChartData();
+
+            currentThread = Thread.CurrentThread;
 
             comboBox1.Items.Add("Vehicle's name");
             comboBox1.SelectedIndex = 0;
            
             
-            Thread t = new Thread(() =>
+            t = new Thread(() =>
             {
+                Program.error = -1;
                 Program.startClient();
             });
             t.Start(); 
 
-            Thread thread = new Thread(() =>
+            thread = new Thread(() =>
             {
                 trackvVehicle();
             });
-            thread.Start();  
-            
+            thread.Start();
+
+            Thread.Sleep(2000); // wait for connect to Server
+            checking = new Thread( ()=>
+            {
+                while (true)
+                {
+                    checkServerConnection();
+                }
+            });
+            checking.Start();
             
         }
 
@@ -84,27 +98,12 @@ namespace VehicleTracking
         }
         void barCheckItem1_CheckedChanged(object sender, ItemClickEventArgs e)
         {
-            //if (mapControl1.Legends.Count > 0)
-            //{
-            //    if (mapControl1.Legends[0].Visibility == VisibilityMode.Auto)
-            //        mapControl1.Legends[0].Visibility = VisibilityMode.Hidden;
-            //    else
-            //        mapControl1.Legends[0].Visibility = VisibilityMode.Auto;
-            //}
-            /*MapItem[] map = new MapItem[1];
-
-
-            items.SetValue(new MapDot() { Location = new GeoPoint(0, 0), Size = 10, Stroke = Color.Red, Fill = Color.Blue }, 0);
-            storage.Items.Clear();
-            storage.Items.AddRange(items);
-            itemsLayer.Data = storage;
-
-            mapControl1.Zoom(12.0);
-            mapControl1.CenterPoint = new GeoPoint(Program.location.x, Program.location.y);
-            //this.mapControl1.SetCenterPoint(new GeoPoint(Program.location.x, Program.location.y), true);*/
+            
+            if (Program.tracking.name == "") return;
             mapControl1.Invoke((MethodInvoker)(() => mapControl1.Zoom(13.0)));
             mapControl1.Invoke((MethodInvoker)(() => mapControl1.CenterPoint = new GeoPoint(Program.tracking.x, Program.tracking.y)));
-            isFocus = true;
+            isFocus = true; 
+            
         }
 
         static string GetRelativePath(string name)
@@ -145,31 +144,8 @@ namespace VehicleTracking
 
             storage.DataChanged += new DataAdapterChangedEventHandler(storage_Change);
 
-           
-            
-
-
-
-            //comboBox1.DataSource = new BindingSource(Program.dataList, null);
-            //comboBox1.DisplayMember = "Key";
-            //MessageBox.Show(Pro)
-
-
-            //items.SetValue(new MapDot() { Location = new GeoPoint(0,100), Size = 10, Stroke = Color.Red, Fill = Color.Blue }, 0);
-
-            //storage.Items.AddRange(items);
-            //itemsLayer.Data = storage;
-
-            //double x = mapControl1.CenterPoint.GetX();
-            //double y = mapControl1.CenterPoint.GetY();
-
-            //mapControl1.Zoom(13.0);
-            //mapControl1.CenterPoint = new GeoPoint(0, 100);
-
-
 
         }
-        // Create an array of callouts for 5 capital cities.
         MapItem[] GetLocationData()
         {
             return new MapItem[] {
@@ -190,7 +166,7 @@ namespace VehicleTracking
                     location.y = Program.tracking.y;
                     if (location.x == -1.0) // Disconect
                     {
-                        MessageBox.Show("Vehicle has disconnected!");
+                        MessageBox.Show("Vehicle "+ comboBox1.SelectedItem.ToString() + " disconnected!");
                         comboBox1.Invoke((MethodInvoker)(() => comboBox1.Items.Remove(Program.tracking.name)));
                         comboBox1.Invoke((MethodInvoker)(() => comboBox1.SelectedIndex = 0));
                         Program.tracking.name = "";
@@ -259,6 +235,41 @@ namespace VehicleTracking
             {
                 Thread.CurrentThread.Priority = ThreadPriority.Highest;
                 bingMapDataProvider1.Kind = BingMapKind.Road;
+            }
+        }
+        private void checkServerConnection()
+        {
+            
+            if (Program.error == 0) // Không thể kết nối với Server
+            {
+                Program.main.Invoke((MethodInvoker)(() => MessageBox.Show("Không thể kết nối đến Server", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error)));
+                thread.Abort();
+                t.Abort();
+                Program.main.Invoke((MethodInvoker)(() => Program.main.Close()));
+                checking.Abort();
+
+                return;
+            }
+
+            if (Program.error == 1) // Server từ chối kết nối
+            {
+                Program.main.Invoke((MethodInvoker)(() => MessageBox.Show("Server từ chối kết nối", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error)));
+                thread.Abort();
+                t.Abort();
+                Program.main.Invoke((MethodInvoker)(() => Program.main.Close()));
+                checking.Abort();
+
+                return;
+            }
+            if (Program.error == 2) // Mất kết nối Server
+            {
+                Program.main.Invoke((MethodInvoker)(() => MessageBox.Show("Mất kết nối tới Server", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error)));
+                thread.Abort();
+                t.Abort();
+                Program.main.Invoke((MethodInvoker)(() => Program.main.Close()));
+                checking.Abort();
+
+                return;
             }
         }
     }
