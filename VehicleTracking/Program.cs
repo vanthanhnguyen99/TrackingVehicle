@@ -22,6 +22,7 @@ namespace VehicleTracking
         public static coord location;
         public static bool isRefresh;
         public static int error = -1; // 0 là không thể kết nối server, 1 là server từ chối kết nối 
+        public static Socket sender;
         public static void startClient()
         {
             tracking.name = "";
@@ -41,7 +42,7 @@ namespace VehicleTracking
                 IPEndPoint remoteEP = new IPEndPoint(ipAddress, 8083);
 
                 // Create a TCP/IP  socket.    
-                Socket sender = new Socket(ipAddress.AddressFamily,
+                sender = new Socket(ipAddress.AddressFamily,
                     SocketType.Stream, ProtocolType.Tcp);
 
                 // Connect the socket to the remote endpoint. Catch any errors.    
@@ -181,7 +182,7 @@ namespace VehicleTracking
                             dataList.Remove(location.name);
                         }
 
-
+                        Thread.Sleep(100);
                     }
 
 
@@ -201,6 +202,7 @@ namespace VehicleTracking
                 catch (ArgumentNullException ane)
                 {
                     Console.WriteLine("ArgumentNullException : {0}", ane.ToString());
+
                 }
                 catch (SocketException se)
                 {
@@ -212,6 +214,8 @@ namespace VehicleTracking
                 catch (Exception e)
                 {
                     Console.WriteLine("Unexpected exception : {0}", e.ToString());
+                    Console.WriteLine("cactch 2");
+                    return;
                 }
 
             }
@@ -219,6 +223,9 @@ namespace VehicleTracking
             {
 
                 Console.WriteLine(e.ToString());
+                Console.WriteLine("cactch 1");
+                
+                return;
                 
             }
 

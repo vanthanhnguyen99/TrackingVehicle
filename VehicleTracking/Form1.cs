@@ -162,6 +162,8 @@ namespace VehicleTracking
                 
                 if (Program.isRefresh)
                 {
+                    if (mapControl1.ZoomLevel != 13) isFocus = false;
+
                     location.x = Program.tracking.x;
                     location.y = Program.tracking.y;
                     if (location.x == -1.0) // Disconect
@@ -242,6 +244,7 @@ namespace VehicleTracking
             
             if (Program.error == 0) // Không thể kết nối với Server
             {
+                
                 Program.main.Invoke((MethodInvoker)(() => MessageBox.Show("Không thể kết nối đến Server", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error)));
                 thread.Abort();
                 t.Abort();
@@ -253,6 +256,7 @@ namespace VehicleTracking
 
             if (Program.error == 1) // Server từ chối kết nối
             {
+                
                 Program.main.Invoke((MethodInvoker)(() => MessageBox.Show("Server từ chối kết nối", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error)));
                 thread.Abort();
                 t.Abort();
@@ -263,6 +267,7 @@ namespace VehicleTracking
             }
             if (Program.error == 2) // Mất kết nối Server
             {
+               
                 Program.main.Invoke((MethodInvoker)(() => MessageBox.Show("Mất kết nối tới Server", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error)));
                 thread.Abort();
                 t.Abort();
@@ -271,6 +276,20 @@ namespace VehicleTracking
 
                 return;
             }
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            thread.Abort();
+            t.Abort();
+            checking.Abort();
+            Thread.Sleep(1000);
+            if (Program.sender.Connected)
+            {
+                Program.sender.Shutdown(System.Net.Sockets.SocketShutdown.Both);
+                Program.sender.Close();
+            }
+
         }
     }
 }

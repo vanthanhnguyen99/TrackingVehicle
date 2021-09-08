@@ -30,9 +30,9 @@ namespace VehicleTracking
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            DevExpress.XtraMap.MiniMap miniMap2 = new DevExpress.XtraMap.MiniMap();
-            DevExpress.XtraMap.DynamicMiniMapBehavior dynamicMiniMapBehavior2 = new DevExpress.XtraMap.DynamicMiniMapBehavior();
-            DevExpress.XtraMap.MiniMapVectorItemsLayer miniMapVectorItemsLayer2 = new DevExpress.XtraMap.MiniMapVectorItemsLayer();
+            DevExpress.XtraMap.MiniMap miniMap6 = new DevExpress.XtraMap.MiniMap();
+            DevExpress.XtraMap.DynamicMiniMapBehavior dynamicMiniMapBehavior6 = new DevExpress.XtraMap.DynamicMiniMapBehavior();
+            this.miniMapVectorItemsLayer2 = new DevExpress.XtraMap.MiniMapVectorItemsLayer();
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.chkMiniMap = new DevExpress.XtraBars.BarCheckItem();
             this.chkShowNavPanel = new DevExpress.XtraBars.BarCheckItem();
@@ -57,6 +57,7 @@ namespace VehicleTracking
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapControl1)).BeginInit();
             this.SuspendLayout();
+            this.miniMapVectorItemsLayer2.Name = "MiniMapShipLayer";
             // 
             // ribbonControl1
             // 
@@ -200,12 +201,11 @@ namespace VehicleTracking
             this.mapControl1.Layers.Add(this.imageLayer1);
             this.mapControl1.Layers.Add(this.vectorItemsLayer3);
             this.mapControl1.Location = new System.Drawing.Point(0, 158);
-            miniMap2.Alignment = DevExpress.XtraMap.MiniMapAlignment.BottomRight;
-            miniMap2.Behavior = dynamicMiniMapBehavior2;
-            miniMapVectorItemsLayer2.Name = "MiniMapShipLayer";
-            miniMap2.Layers.Add(miniMapVectorItemsLayer2);
-            miniMap2.Visible = false;
-            this.mapControl1.MiniMap = miniMap2;
+            miniMap6.Alignment = DevExpress.XtraMap.MiniMapAlignment.BottomRight;
+            miniMap6.Behavior = dynamicMiniMapBehavior6;
+            miniMap6.Layers.Add(this.miniMapVectorItemsLayer2);
+            miniMap6.Visible = false;
+            this.mapControl1.MiniMap = miniMap6;
             this.mapControl1.Name = "mapControl1";
             this.mapControl1.Size = new System.Drawing.Size(1101, 565);
             this.mapControl1.TabIndex = 0;
@@ -234,6 +234,7 @@ namespace VehicleTracking
             this.Name = "Form1";
             this.Ribbon = this.ribbonControl1;
             this.Text = "Vehicle Tracking";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapControl1)).EndInit();
@@ -266,6 +267,7 @@ namespace VehicleTracking
         public DevExpress.XtraMap.BingMapDataProvider bingMapDataProvider1;
         private DevExpress.XtraMap.VectorItemsLayer vectorItemsLayer3;
         private DevExpress.XtraMap.MapItemStorage mapItemStorage1;
+        private DevExpress.XtraMap.MiniMapVectorItemsLayer miniMapVectorItemsLayer2;
     }
 }
 
