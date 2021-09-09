@@ -17,11 +17,11 @@ namespace VehicleTracking
         /// </summary>
         /// 
         public static coord tracking = new coord();
-        public static Form1 main;
+        public static FormMain main;
         public static SortedDictionary<string, coord> dataList = new SortedDictionary<string, coord>();
         public static coord location;
         public static bool isRefresh;
-        public static int error = -1; // 0 là không thể kết nối server, 1 là server từ chối kết nối 
+        public static int error = -1; // 0 là không thể kết nối server, 1 là server từ chối kết nối , 2 là mất kết nối đến Server
         public static Socket sender;
         public static void startClient()
         {
@@ -38,8 +38,8 @@ namespace VehicleTracking
                 // In this case, we get one IP address of localhost that is IP : 127.0.0.1  
                 // If a host has multiple addresses, you will get a list of addresses  
                 //IPHostEntry host = Dns.GetHostEntry("http://192.168.6.128");
-                IPAddress ipAddress = IPAddress.Parse("192.168.1.8");
-                IPEndPoint remoteEP = new IPEndPoint(ipAddress, 8083);
+                IPAddress ipAddress = IPAddress.Parse("116.109.68.173");
+                IPEndPoint remoteEP = new IPEndPoint(ipAddress, 8084);
 
                 // Create a TCP/IP  socket.    
                 sender = new Socket(ipAddress.AddressFamily,
@@ -99,11 +99,18 @@ namespace VehicleTracking
                         try
                         {
                             coord x = Program.dataList[location.name];
+                            dataList[location.name] = new coord(location.x, location.y, location.name);
+                            FormMain.list.Add(location.name);
                         }
                         catch (Exception e)
                         {
-                            
-                            if (main != null) main.comboBox1.Invoke((MethodInvoker)(() => main.comboBox1.Items.Add(location.name)));
+
+                            if (main != null)
+                            {
+                                main.comboBox1.Invoke((MethodInvoker)(() => main.comboBox1.Items.Add(location.name)));
+                                dataList[location.name] = new coord(location.x, location.y, location.name);
+                                FormMain.list.Add(location.name);
+                            }
                             Console.WriteLine("khoi catch");
                         }
                         if (location.name == tracking.name)
@@ -113,8 +120,7 @@ namespace VehicleTracking
                             Program.tracking.name = location.name;
                             isRefresh = true;
                         }
-                        dataList[location.name] = new coord(location.x, location.y, location.name);
-                        Form1.list.Add(location.name);
+                        
                     }
                     else // prepare disconect
                     {
@@ -151,10 +157,18 @@ namespace VehicleTracking
                             try
                             {
                                 coord x = Program.dataList[location.name];
+                                dataList[location.name] = new coord(location.x, location.y, location.name);
+                                FormMain.list.Add(location.name);
                             }
                             catch (Exception e)
                             {
-                                if (main.comboBox1 != null) main.comboBox1.Invoke((MethodInvoker)(() => main.comboBox1.Items.Add(location.name)));
+                                if (main != null)
+                                {
+                                    main.comboBox1.Invoke((MethodInvoker)(() => main.comboBox1.Items.Add(location.name)));
+                                    dataList[location.name] = new coord(location.x, location.y, location.name);
+                                    FormMain.list.Add(location.name);
+                                    Console.WriteLine("hoi cham");
+                                }
                                 Console.WriteLine("khoi catch");
                             }
                             if (location.name == tracking.name)
@@ -164,8 +178,7 @@ namespace VehicleTracking
                                 Program.tracking.name = location.name;
                                 isRefresh = true;
                             }
-                            dataList[location.name] = new coord(location.x, location.y, location.name);
-                            Form1.list.Add(location.name);
+                            
                         }
                         else // prepare disconect
                         {
@@ -238,7 +251,7 @@ namespace VehicleTracking
             
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Program.main = new Form1();
+            Program.main = new FormMain();
             Application.Run(main);
 
         }

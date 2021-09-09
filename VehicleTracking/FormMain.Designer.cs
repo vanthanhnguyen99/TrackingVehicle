@@ -1,7 +1,7 @@
 ﻿
 namespace VehicleTracking
 {
-    partial class Form1
+    partial class FormMain
     {
         /// <summary>
         /// Required designer variable.
@@ -29,12 +29,11 @@ namespace VehicleTracking
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            DevExpress.XtraMap.MiniMap miniMap6 = new DevExpress.XtraMap.MiniMap();
-            DevExpress.XtraMap.DynamicMiniMapBehavior dynamicMiniMapBehavior6 = new DevExpress.XtraMap.DynamicMiniMapBehavior();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
+            DevExpress.XtraMap.MiniMap miniMap1 = new DevExpress.XtraMap.MiniMap();
+            DevExpress.XtraMap.DynamicMiniMapBehavior dynamicMiniMapBehavior1 = new DevExpress.XtraMap.DynamicMiniMapBehavior();
             this.miniMapVectorItemsLayer2 = new DevExpress.XtraMap.MiniMapVectorItemsLayer();
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
-            this.chkMiniMap = new DevExpress.XtraBars.BarCheckItem();
             this.chkShowNavPanel = new DevExpress.XtraBars.BarCheckItem();
             this.chkNavigation = new DevExpress.XtraBars.BarCheckItem();
             this.bbiZoomIn = new DevExpress.XtraBars.BarButtonItem();
@@ -65,7 +64,6 @@ namespace VehicleTracking
             this.ribbonControl1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.ribbonControl1.ExpandCollapseItem,
             this.ribbonControl1.SearchEditItem,
-            this.chkMiniMap,
             this.chkShowNavPanel,
             this.chkNavigation,
             this.bbiZoomIn,
@@ -79,15 +77,6 @@ namespace VehicleTracking
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1});
             this.ribbonControl1.Size = new System.Drawing.Size(1101, 158);
-            // 
-            // chkMiniMap
-            // 
-            this.chkMiniMap.Caption = "Show Minimap";
-            this.chkMiniMap.Id = 1;
-            this.chkMiniMap.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("chkMiniMap.ImageOptions.Image")));
-            this.chkMiniMap.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("chkMiniMap.ImageOptions.LargeImage")));
-            this.chkMiniMap.Name = "chkMiniMap";
-            this.chkMiniMap.CheckedChanged += new DevExpress.XtraBars.ItemClickEventHandler(this.chkShowMiniMap_CheckedChanged);
             // 
             // chkShowNavPanel
             // 
@@ -169,7 +158,6 @@ namespace VehicleTracking
             this.ribbonPageGroup2.ItemLinks.Add(this.bbiInitialView);
             this.ribbonPageGroup2.ItemLinks.Add(this.chkShowNavPanel);
             this.ribbonPageGroup2.ItemLinks.Add(this.chkNavigation);
-            this.ribbonPageGroup2.ItemLinks.Add(this.chkMiniMap);
             this.ribbonPageGroup2.ItemLinks.Add(this.bbiZoomIn);
             this.ribbonPageGroup2.ItemLinks.Add(this.bbiZoomOut);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
@@ -185,7 +173,7 @@ namespace VehicleTracking
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(540, 88);
+            this.comboBox1.Location = new System.Drawing.Point(468, 88);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 2;
@@ -201,11 +189,11 @@ namespace VehicleTracking
             this.mapControl1.Layers.Add(this.imageLayer1);
             this.mapControl1.Layers.Add(this.vectorItemsLayer3);
             this.mapControl1.Location = new System.Drawing.Point(0, 158);
-            miniMap6.Alignment = DevExpress.XtraMap.MiniMapAlignment.BottomRight;
-            miniMap6.Behavior = dynamicMiniMapBehavior6;
-            miniMap6.Layers.Add(this.miniMapVectorItemsLayer2);
-            miniMap6.Visible = false;
-            this.mapControl1.MiniMap = miniMap6;
+            miniMap1.Alignment = DevExpress.XtraMap.MiniMapAlignment.BottomRight;
+            miniMap1.Behavior = dynamicMiniMapBehavior1;
+            miniMap1.Layers.Add(this.miniMapVectorItemsLayer2);
+            miniMap1.Visible = false;
+            this.mapControl1.MiniMap = miniMap1;
             this.mapControl1.Name = "mapControl1";
             this.mapControl1.Size = new System.Drawing.Size(1101, 565);
             this.mapControl1.TabIndex = 0;
@@ -223,7 +211,7 @@ namespace VehicleTracking
             this.bingMapDataProvider1.Kind = DevExpress.XtraMap.BingMapKind.Road;
             this.vectorItemsLayer3.Data = this.mapItemStorage1;
             // 
-            // Form1
+            // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -231,7 +219,7 @@ namespace VehicleTracking
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.mapControl1);
             this.Controls.Add(this.ribbonControl1);
-            this.Name = "Form1";
+            this.Name = "FormMain";
             this.Ribbon = this.ribbonControl1;
             this.Text = "Vehicle Tracking";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
@@ -252,7 +240,6 @@ namespace VehicleTracking
 
         private DevExpress.XtraBars.BarCheckItem chkShowNavPanel;
         private DevExpress.XtraBars.BarCheckItem chkNavigation;
-        private DevExpress.XtraBars.BarCheckItem chkMiniMap;
         private DevExpress.XtraBars.BarButtonItem bbiZoomIn;
         private DevExpress.XtraBars.BarButtonItem bbiZoomOut;
         private DevExpress.XtraBars.BarButtonItem bbiInitialView;

@@ -84,7 +84,6 @@ C:\C#\VehicleTracking\VehicleTracking\bin\Debug\es\DevExpress.Office.v19.2.Core.
 C:\C#\VehicleTracking\VehicleTracking\bin\Debug\ja\DevExpress.Office.v19.2.Core.resources.dll
 C:\C#\VehicleTracking\VehicleTracking\bin\Debug\ru\DevExpress.Office.v19.2.Core.resources.dll
 C:\C#\VehicleTracking\VehicleTracking\obj\Debug\VehicleTracking.csproj.AssemblyReference.cache
-C:\C#\VehicleTracking\VehicleTracking\obj\Debug\VehicleTracking.Form1.resources
 C:\C#\VehicleTracking\VehicleTracking\obj\Debug\VehicleTracking.Properties.Resources.resources
 C:\C#\VehicleTracking\VehicleTracking\obj\Debug\VehicleTracking.csproj.GenerateResource.cache
 C:\C#\VehicleTracking\VehicleTracking\obj\Debug\VehicleTracking.exe.licenses
@@ -96,3 +95,4 @@ C:\C#\VehicleTracking\VehicleTracking\bin\Debug\DevExpress.TreeMap.v19.2.Core.dl
 C:\C#\VehicleTracking\VehicleTracking\bin\Debug\DevExpress.XtraTreeMap.v19.2.dll
 C:\C#\VehicleTracking\VehicleTracking\bin\Debug\DevExpress.TreeMap.v19.2.Core.xml
 C:\C#\VehicleTracking\VehicleTracking\bin\Debug\DevExpress.XtraTreeMap.v19.2.xml
+C:\C#\VehicleTracking\VehicleTracking\obj\Debug\VehicleTracking.FormMain.resources

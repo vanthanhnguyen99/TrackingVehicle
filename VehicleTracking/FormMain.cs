@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace VehicleTracking
 {
-    public partial class Form1 : DevExpress.XtraBars.Ribbon.RibbonForm
+    public partial class FormMain : DevExpress.XtraBars.Ribbon.RibbonForm
     {
         
         public static BindingList<string> list = new BindingList<string>();
@@ -26,7 +26,7 @@ namespace VehicleTracking
         Thread thread; // display vehicle
         Thread checking; // check connection with Server
         Thread currentThread;
-        public Form1()
+        public FormMain()
         {
             InitializeComponent();
 
@@ -94,7 +94,7 @@ namespace VehicleTracking
         }
         void chkShowMiniMap_CheckedChanged(object sender, ItemClickEventArgs e)
         {
-            mapControl1.MiniMap.Visible = !mapControl1.MiniMap.Visible;
+           /* mapControl1.MiniMap.Visible = !mapControl1.MiniMap.Visible;*/
         }
         void barCheckItem1_CheckedChanged(object sender, ItemClickEventArgs e)
         {
@@ -221,6 +221,7 @@ namespace VehicleTracking
         {
             if (comboBox1.SelectedIndex == 0) return;
             //MessageBox.Show(comboBox1.SelectedItem.ToString());
+            mapControl1.ZoomLevel = 13;
             isFocus = true;
             Program.tracking = Program.dataList[comboBox1.SelectedItem.ToString()];
         }
